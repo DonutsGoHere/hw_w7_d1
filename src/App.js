@@ -19,17 +19,29 @@ function App() {
     )
   })
 
+  const handleTaskInput = (evt) => {
+    setNewTask(evt.target.value);
+  }
+
+  const addNewTask = (evt) => {
+    evt.preventDefault();
+    const copyTasks = [...tasks];
+    copyTasks.push(newTask);
+    setTasks(copyTasks)
+    setNewTask("")
+  }
+
   return (
     <div className="App">
+      <h1>To-Do</h1>
       <ul>
         {taskNodes}
       </ul>
-      <form>
+      <form onSubmit={addNewTask}>
         <label>Add new task To-Do:</label>
-        <input></input>
-        <input></input>
+        <input id="new_task" type="text" value={newTask} onChange={handleTaskInput} />
+        <input type="submit" value="Add new task"/>
       </form>
-      <button>Add task</button>
     </div>
   );
 }
