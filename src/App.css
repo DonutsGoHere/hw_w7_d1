@@ -26,12 +26,13 @@ li{
   width: 66%;
 }
 li.high-priority {
-  border: 2px solid red;
+  border: 5px solid red;
+  border-style: ridge ;
   color: black;
-  text-shadow: 1px 1px red;
+  text-shadow: 1px 1px 3px red;
 }
 li.low-priority {
-  border: 2px solid dodgerblue;
+  border: 1px solid dodgerblue;
   color: dodgerblue;
 }
 
