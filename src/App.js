@@ -11,6 +11,8 @@ function App() {
 
   const [newTask, setNewTask] = useState("");
 
+  const [newPriority, setNewPriority] = useState("")
+
   const taskNodes = tasks.map((task, index) => {
     return(
       <li key={index} className={task.highPriority ? "high-priority":"low-priority"}>
@@ -25,34 +27,42 @@ function App() {
     setNewTask(evt.target.value);
   }
 
+  const handlePriorityInput = (evt) => {
+    setNewPriority(evt.target.value);
+  }
+
   const addNewTask = (evt) => {
     evt.preventDefault();
     const copyTasks = [...tasks];
-    copyTasks.push({name: newTask, highPriority: false});
+    copyTasks.push({name: newTask, highPriority: newPriority});
     setTasks(copyTasks);
-    setNewTask("")
+    setNewTask("");
+    setNewPriority("");
   }
 
-  const changePriority = (index) => {
-    const copyTasks = [...tasks];
-    copyTasks[index].highPriority = true;
-    setTasks(copyTasks)
-  }
+  // const addNewPriority = (evt) => {
+  //   evt.preventDefault();
+  //   const copyTasks = [...tasks];
+  //   copyTasks.push({name: newTask, highPriority: newPriority});
+  //   setTasks(copyTasks);
+  //   setNewPriority("");
+  // }
 
   return (
     <div className="App">
       <div><h1>To-Do</h1></div>
+      <hr></hr><div><form onSubmit={addNewTask}>
+        <label>Add new task To-Do:</label>
+        <input id="new_task" type="text" value={newTask} onChange={handleTaskInput}/>
+        <input type="submit" value="Add new task"/>
+        <label>high</label><input type="radio" value="high-priority" onChange={handlePriorityInput}/>
+        <label>low</label><input type="radio" value="low-priority" onChange={handlePriorityInput}/>
+      </form></div>
       <hr></hr>
       <div><ul>
         {taskNodes}
       </ul></div>
-      <div><form onSubmit={addNewTask}>
-        <div><label>Add new task To-Do:</label></div>
-        <div><input id="new_task" type="text" value={newTask} onChange={handleTaskInput}/></div>
-        <div><input type="submit" value="Add new task"/></div>
-        <div><label>high</label><input type="radio" value="high-priority" onChange={changePriority}/></div>
-        <div><label>low</label><input type="radio" value="low-priority" onChange={changePriority}/></div>
-      </form></div>
+      
     </div>
   );
 }
